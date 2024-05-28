@@ -60,32 +60,7 @@ exports.cancelAppointment = (req, res, next) => {
     });
 };
 
-exports.findAll = (req, res, next) => {
-  Patient.findAll({
-    where: {
-      appointment_status: "Submitted",
-      status: true,
-    },
-  })
-    .then((user) => {
-      if (user.length === 0) {
-        return res.status(400).json({
-          status: false,
-          message: "There's no available",
-        });
-      }
-      return user;
-    })
-    .then((user) => {
-      res.status(200).json({
-        status: true,
-        user: user,
-      });
-    })
-    .catch((err) => {
-      next(err);
-    });
-};
+
 
 //accept or admit
 exports.admitPatient = (req, res, next) => {
@@ -192,29 +167,3 @@ exports.editAdmission = (req, res, next) => {
 };
 
 
-exports.findAllInProgress = (req, res, next) => {
-    Patient.findAll({
-      where: {
-        appointment_status: "InProgress",
-        status: true,
-      },
-    })
-      .then((user) => {
-        if (user.length === 0) {
-          return res.status(400).json({
-            status: false,
-            message: "There's no available",
-          });
-        }
-        return user;
-      })
-      .then((user) => {
-        res.status(200).json({
-          status: true,
-          user: user,
-        });
-      })
-      .catch((err) => {
-        next(err);
-      });
-  };

@@ -8,11 +8,9 @@ const router = express.Router();
 const {
   sendAppointment,
   cancelAppointment,
-  findAll,
   admitPatient,
   cancelAdmission,
   editAdmission,
-  findAllInProgress,
 } = require("../../controllers/admit");
 
 router.post(
@@ -36,7 +34,6 @@ router.delete(
   cancelAppointment
 );
 
-router.get("/find-all", findAll);
 
 //admit or accept
 
@@ -64,6 +61,5 @@ router.put(
   editAdmission
 );
 
-router.get("/find", findAllInProgress);
 
 module.exports = router;
