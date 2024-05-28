@@ -6,11 +6,10 @@ exports.dischargePatient = (req, res, next) => {
   Patient.findOne({
     where: {
       id: patientId,
-      appointment_status: "InProgess",
+      appointment_status: "InProgress",
       status: true,
     },
-  })
-    .then((user) => {
+  }).then((user) => {
       if (!user) {
         return res.status(400).json({
           success: false,
@@ -59,7 +58,7 @@ exports.deleteComplete = (res, req, next) => {
     .then(() => {
       return res.status(200).json({
         success: true,
-        message: "Patient Discharge",
+        message: "Application Delete",
       });
     })
     .catch((error) => {

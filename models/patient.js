@@ -39,7 +39,7 @@ const Patient = sequelizeConnect.define(
       allowNull: false,
     },
     appointment_status: {
-      type: Sequelize.ENUM("Submitted", "In Progress", "Completed", "Canceled"),
+      type: Sequelize.ENUM("Submitted", "InProgress", "Completed", "Canceled"),
       allowNull: true,
       defaultValue: "Submitted",
     },
@@ -74,8 +74,8 @@ const Patient = sequelizeConnect.define(
     },
     status: {
       type: Sequelize.BOOLEAN,
-      allowNull: true,
-      defaultValue: false,
+      allowNull: false,
+      defaultValue: true,
     },
   },
   {

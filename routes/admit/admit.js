@@ -12,6 +12,7 @@ const {
   admitPatient,
   cancelAdmission,
   editAdmission,
+  findAllInProgress,
 } = require("../../controllers/admit");
 
 router.post(
@@ -45,6 +46,7 @@ router.put(
     body("patiendId").notEmpty(),
     body("admission_date").notEmpty(),
     body("doctor_incharge").notEmpty(),
+    body("patient_case").optional(),
   ],
   admitPatient
 );
@@ -57,8 +59,11 @@ router.put(
     body("patiendId").notEmpty(),
     body("admission_date").notEmpty(),
     body("doctor_incharge").notEmpty(),
+    body("patient_case").notEmpty(),
   ],
   editAdmission
 );
+
+router.get("/find", findAllInProgress);
 
 module.exports = router;

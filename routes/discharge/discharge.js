@@ -21,6 +21,11 @@ router.put(
   dischargePatient
 );
 
-router.put("/delete-complete", [body("patientId").notEmpty()], deleteComplete);
+router.delete(
+  "/delete-complete",
+  [body("patientId").notEmpty()],
+  validation,
+  deleteComplete
+);
 
-module.exports = router
+module.exports = router;

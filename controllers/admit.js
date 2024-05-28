@@ -89,11 +89,11 @@ exports.findAll = (req, res, next) => {
 
 //accept or admit
 exports.admitPatient = (req, res, next) => {
-  const { patiendId, admission_date, doctor_incharge } = req.body;
+  const { patientId, admission_date, patient_case, doctor_incharge, } = req.body;
 
   Patient.findOne({
     where: {
-      id: patiendId,
+      id: patientId,
       appointment_status: "Submitted",
       status: true,
     },
@@ -105,10 +105,11 @@ exports.admitPatient = (req, res, next) => {
           message: "Application does not exist",
         });
       } else {
-        user.appointment_status = "InProgress";
         user.patient_status = "Admit";
         user.doctor_incharge = doctor_incharge;
         user.admission_date = admission_date;
+        user.case = patient_case;
+        user.appointment_status = "InProgress";
         return user.save();
       }
     })
@@ -124,11 +125,11 @@ exports.admitPatient = (req, res, next) => {
 };
 
 exports.cancelAdmission = (req, res, next) => {
-  const { patiendId } = req.body;
+  const { patientId } = req.body;
 
   Patient.findOne({
     where: {
-      id: patiendId,
+      id: patientId,
       appointment_status: "Submitted",
       status: true,
     },
@@ -157,11 +158,11 @@ exports.cancelAdmission = (req, res, next) => {
 };
 
 exports.editAdmission = (req, res, next) => {
-  const { patiendId, admission_date, doctor_incharge } = req.body;
+  const { patientId, admission_date, patient_case, doctor_incharge } = req.body;
 
   Patient.findOne({
     where: {
-      id: patiendId,
+      id: patientId,
       appointment_status: "InProgress",
       status: true,
     },
@@ -175,6 +176,7 @@ exports.editAdmission = (req, res, next) => {
       } else {
         user.admission_date = admission_date;
         user.doctor_incharge = doctor_incharge;
+        user.case = patient_case;
         return user.save();
       }
     })
@@ -188,3 +190,31 @@ exports.editAdmission = (req, res, next) => {
       next(error);
     });
 };
+
+
+exports.findAllInProgress = (req, res, next) => {
+    Patient.findAll({
+      where: {
+        appointment_status: "InProgress",
+        status: true,
+      },
+    })
+      .then((user) => {
+        if (user.length === 0) {
+          return res.status(400).json({
+            status: false,
+            message: "There's no available",
+          });
+        }
+        return user;
+      })
+      .then((user) => {
+        res.status(200).json({
+          status: true,
+          user: user,
+        });
+      })
+      .catch((err) => {
+        next(err);
+      });
+  };
