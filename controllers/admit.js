@@ -88,7 +88,7 @@ exports.findAll = (req, res, next) => {
 };
 
 //accept or admit
-exports.acceptApplication = (req, res, next) => {
+exports.admitPatient = (req, res, next) => {
   const { patiendId, admission_date, doctor_incharge } = req.body;
 
   Patient.findOne({
@@ -123,7 +123,7 @@ exports.acceptApplication = (req, res, next) => {
     });
 };
 
-exports.cancelApplication = (req, res, next) => {
+exports.cancelAdmission = (req, res, next) => {
   const { patiendId } = req.body;
 
   Patient.findOne({
@@ -156,7 +156,7 @@ exports.cancelApplication = (req, res, next) => {
     });
 };
 
-exports.editAppointment = (req, res, next) => {
+exports.editAdmission = (req, res, next) => {
   const { patiendId, admission_date, doctor_incharge } = req.body;
 
   Patient.findOne({

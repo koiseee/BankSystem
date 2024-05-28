@@ -64,5 +64,5 @@ exports.deleteComplete = (res, req, next) => {
     })
     .catch((error) => {
       next(error);
-    }); 
+    });
 };
