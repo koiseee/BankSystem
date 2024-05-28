@@ -79,7 +79,7 @@ const Patient = sequelizeConnect.define(
     },
   },
   {
-    timestamps: true,
+    timestamps: false,
   }
 );
 
