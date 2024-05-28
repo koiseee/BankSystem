@@ -25,6 +25,7 @@ router.post(
     body("phone_number").notEmpty(),
     body("notes").notEmpty(),
   ],
+  validation,
   sendAppointment
 );
 
