@@ -17,9 +17,6 @@ app.use("*", (req, res, next) => {
 });
 app.use(routes);
 
-app.get('/', (req, res) => {
-  res.send('Hello, world!');
-});
 
 const testDatabaseConnection = async () => {
   try {
